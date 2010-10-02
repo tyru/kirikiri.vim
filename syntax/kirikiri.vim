@@ -18,6 +18,8 @@ syn match kirikiriScenarioCommandLine "^\t*\zs@.*$" contains=kirikiriScenarioCom
 syn region kirikiriScenarioCommandTag        start="\[" end="\]" contains=kirikiriScenarioCommandTagName,kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
 
 " TODO: Use syn-keyword
+" TODO: If installed syntax/tjs.vim, Use syn-include for "iscript".
+" Or ignore it.
 syn match kirikiriScenarioCommandTagName  "\%(@\|\[\)\zs\w\+" contained nextgroup=kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
 
 
