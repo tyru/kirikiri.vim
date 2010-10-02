@@ -10,22 +10,21 @@ endif
 syn case match
 
 
-syn match kirikiriScenarioLineComment "^\t*;.*$"
-syn match kirikiriScenarioLabel       "^\t*\*.*$"
+syn match kirikiriScenarioLineComment ";.*"
+syn match kirikiriScenarioLabel       "^\*\S\+"
 
 
-syn match kirikiriScenarioCommandLine "^\t*\[[^\[\]]\+\][ \t]*$" contains=kirikiriScenarioCommandTag,kirikiriScenarioCommandParameters
-syn match kirikiriScenarioCommandLine "^\t*@.*$" contains=kirikiriScenarioCommandTag,kirikiriScenarioCommandParameters
+syn match kirikiriScenarioCommandLine "^\t*\zs@.*$" contains=kirikiriScenarioCommandTagName,kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
+syn region kirikiriScenarioCommandTag        start="\[" end="\]" contains=kirikiriScenarioCommandTagName,kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
 
-syn match kirikiriScenarioCommandTag  "^\t*\[[ \t]*\zs\w\+" contained nextgroup=kirikiriScenarioCommandParameters
-syn match kirikiriScenarioCommandTag  "^\t*@\zs\w\+" contained nextgroup=kirikiriScenarioCommandParameters
+" TODO: Use syn-keyword
+syn match kirikiriScenarioCommandTagName  "\%(@\|\[\)\zs\w\+" contained nextgroup=kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
 
-
-syn match kirikiriScenarioCommandParameters /\w\+=\%(\w\+\|"[^"]*"\|'[^']*'\)/ contained skipwhite contains=kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue,kirikiriScenarioString,kirikiriScenarioBoolean
 
 syn match kirikiriScenarioCommandParametersKey "\w\+\ze=" contained skipwhite nextgroup=kirikiriScenarioCommandParametersEqual
 syn match kirikiriScenarioCommandParametersEqual "=" contained nextgroup=kirikiriScenarioCommandParametersValue,kirikiriScenarioString,kirikiriScenarioBoolean
-syn match kirikiriScenarioCommandParametersValue "=\zs\w\+" contained
+" FIXME: won't highlight
+syn match kirikiriScenarioCommandParametersValue "=\zs\S\+" contained
 
 syn region kirikiriScenarioString start=/"/ end=/"/
 syn region kirikiriScenarioString start=/'/ end=/'/
@@ -38,24 +37,25 @@ syn keyword kirikiriScenarioBoolean true false
 if v:version >= 508 || !exists("did_kirikiriscenario_syn_inits")
     if v:version < 508
         let did_kirikiriscenario_syn_inits = 1
-        command -nargs=+ HiLink hi link <args>
+        command -nargs=+ KirikiriHiLink hi link <args>
     else
-        command -nargs=+ HiLink hi def link <args>
+        command -nargs=+ KirikiriHiLink hi def link <args>
     endif
 
-    HiLink kirikiriScenarioLineComment Comment
-    HiLink kirikiriScenarioLabel       Label
+    KirikiriHiLink kirikiriScenarioLineComment Comment
+    KirikiriHiLink kirikiriScenarioLabel       Label
 
-    HiLink kirikiriScenarioCommandLine           Identifier
-    HiLink kirikiriScenarioCommandTag            Identifier
-    HiLink kirikiriScenarioCommandParametersKey  Type
+    KirikiriHiLink kirikiriScenarioCommandTag               Function
+    KirikiriHiLink kirikiriScenarioCommandTagName           Statement
+    KirikiriHiLink kirikiriScenarioCommandParametersKey     Type
+    KirikiriHiLink kirikiriScenarioCommandParametersValue   String
 
-    HiLink kirikiriScenarioString    String
-    HiLink kirikiriScenarioBoolean   Boolean
+    KirikiriHiLink kirikiriScenarioString    String
+    KirikiriHiLink kirikiriScenarioBoolean   Boolean
 
-    delcommand HiLink
+    delcommand KirikiriHiLink
 endif
 
 
 
-let b:current_syntax = 'kirikiriscenario'
+let b:current_syntax = 'kirikiri'
