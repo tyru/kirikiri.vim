@@ -25,6 +25,7 @@ syn region kirikiriCommandTag        start="\[" end="\]" contains=kirikiriComman
 
 
 if globpath(&rtp, 'syntax/tjs.vim') != ''
+    " FIXME: "[iscript]" won't highlight
     syn include @tjs syntax/tjs.vim
     syn region kirikiriIscript start="\[\s*iscript\s*\]" end="\[\s*endscript\s*\]"me=s-1 contains=kirikiriIscriptIscript,@tjs,kirikiriIscriptEndscript keepend
 endif
