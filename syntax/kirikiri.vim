@@ -13,7 +13,7 @@ else
 endif
 
 
-syn case match
+syn case ignore
 
 
 syn match kirikiriLineComment ";.*"
