@@ -20,7 +20,7 @@ syn region kirikiriScenarioCommandTag        start="\[" end="\]" contains=kiriki
 " TODO: Use syn-keyword
 " TODO: If installed syntax/tjs.vim, Use syn-include for "iscript".
 " Or ignore it.
-syn match kirikiriScenarioCommandTagName  "\%(@\|\[\)\zs\w\+" contained nextgroup=kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
+syn match kirikiriScenarioCommandTagName  "\%(@\|\[\)\zs\w\+" contained skipwhite nextgroup=kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
 
 
 syn match kirikiriScenarioCommandParametersKey "\w\+\ze=" contained skipwhite nextgroup=kirikiriScenarioCommandParametersEqual
