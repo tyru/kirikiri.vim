@@ -10,50 +10,50 @@ endif
 syn case match
 
 
-syn match kirikiriScenarioLineComment ";.*"
-syn match kirikiriScenarioLabel       "^\*\S\+"
+syn match kirikiriLineComment ";.*"
+syn match kirikiriLabel       "^\*\S\+"
 
 
-syn match kirikiriScenarioCommandLine "^\t*\zs@.*$" contains=kirikiriScenarioCommandTagName,kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
-syn region kirikiriScenarioCommandTag        start="\[" end="\]" contains=kirikiriScenarioCommandTagName,kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
+syn match kirikiriCommandLine "^\t*\zs@.*$" contains=kirikiriCommandTagName,kirikiriCommandParametersKey,kirikiriCommandParametersEqual,kirikiriCommandParametersValue
+syn region kirikiriCommandTag        start="\[" end="\]" contains=kirikiriCommandTagName,kirikiriCommandParametersKey,kirikiriCommandParametersEqual,kirikiriCommandParametersValue
 
 " TODO: Use syn-keyword
 " TODO: If installed syntax/tjs.vim, Use syn-include for "iscript".
 " Or ignore it.
-syn match kirikiriScenarioCommandTagName  "\%(@\|\[\)\zs\w\+" contained skipwhite nextgroup=kirikiriScenarioCommandParametersKey,kirikiriScenarioCommandParametersEqual,kirikiriScenarioCommandParametersValue
+syn match kirikiriCommandTagName  "\%(@\|\[\)\zs\w\+" contained skipwhite nextgroup=kirikiriCommandParametersKey,kirikiriCommandParametersEqual,kirikiriCommandParametersValue
 
 
-syn match kirikiriScenarioCommandParametersKey "\w\+\ze=" contained skipwhite nextgroup=kirikiriScenarioCommandParametersEqual
-syn match kirikiriScenarioCommandParametersEqual "=" contained nextgroup=kirikiriScenarioCommandParametersValue,kirikiriScenarioString,kirikiriScenarioBoolean
+syn match kirikiriCommandParametersKey "\w\+\ze=" contained skipwhite nextgroup=kirikiriCommandParametersEqual
+syn match kirikiriCommandParametersEqual "=" contained nextgroup=kirikiriCommandParametersValue,kirikiriString,kirikiriBoolean
 " FIXME: won't highlight
-syn match kirikiriScenarioCommandParametersValue "=\zs\S\+" contained
+syn match kirikiriCommandParametersValue "=\zs\S\+" contained
 
-syn region kirikiriScenarioString start=/"/ end=/"/
-syn region kirikiriScenarioString start=/'/ end=/'/
+syn region kirikiriString start=/"/ end=/"/
+syn region kirikiriString start=/'/ end=/'/
 
-syn keyword kirikiriScenarioBoolean true false
-
-
+syn keyword kirikiriBoolean true false
 
 
-if v:version >= 508 || !exists("did_kirikiriscenario_syn_inits")
+
+
+if v:version >= 508 || !exists("did_kirikiri_syn_inits")
     if v:version < 508
-        let did_kirikiriscenario_syn_inits = 1
+        let did_kirikiri_syn_inits = 1
         command -nargs=+ KirikiriHiLink hi link <args>
     else
         command -nargs=+ KirikiriHiLink hi def link <args>
     endif
 
-    KirikiriHiLink kirikiriScenarioLineComment Comment
-    KirikiriHiLink kirikiriScenarioLabel       Label
+    KirikiriHiLink kirikiriLineComment Comment
+    KirikiriHiLink kirikiriLabel       Label
 
-    KirikiriHiLink kirikiriScenarioCommandTag               Function
-    KirikiriHiLink kirikiriScenarioCommandTagName           Statement
-    KirikiriHiLink kirikiriScenarioCommandParametersKey     Type
-    KirikiriHiLink kirikiriScenarioCommandParametersValue   String
+    KirikiriHiLink kirikiriCommandTag               Function
+    KirikiriHiLink kirikiriCommandTagName           Statement
+    KirikiriHiLink kirikiriCommandParametersKey     Type
+    KirikiriHiLink kirikiriCommandParametersValue   String
 
-    KirikiriHiLink kirikiriScenarioString    String
-    KirikiriHiLink kirikiriScenarioBoolean   Boolean
+    KirikiriHiLink kirikiriString    String
+    KirikiriHiLink kirikiriBoolean   Boolean
 
     delcommand KirikiriHiLink
 endif
