@@ -23,7 +23,7 @@ syn keyword kirikiriCommandTagName contained skipwhite nextgroup=kirikiriCommand
 
 
 
-syn match kirikiriCommandParametersKey "\w\+\ze=" contained skipwhite nextgroup=kirikiriCommandParametersEqual
+syn keyword kirikiriCommandParametersKey contained skipwhite nextgroup=kirikiriCommandParametersEqual accel align alt angle ask audiostreamnum autohide autoreturn backlay bceil bfloor bgamma bgcolor bgm bold buf call canskip ch channel char children click clickse clicksebuf clipheight clipleft cliptop clipwidth color countpage default delay destlayer destpage draggable dx dy edge edgecolor enabled end enterse entersebuf eol exp expand face fix fliplr flipud for frame framekey from func gceil gfloor ggamma graphic graphickey grayscale gvolume height hint hmax index italic jump kag key layer layers leavese leavesebuf left length line linekey linesize linespacing loop mapaction mapimage marginb marginl marginr margint maxchars mcolor messages method mode module mopacity name onenter onleave onskip opacity output overlap page pagekey pan path pausevideo pitch place playrate pointed pos position prompt rceil recthit repage restore rfloor rgamma rubyoffset rubysize rule se sebuf seg sh shadow shadowcolor size slot speed spline srclayer srcpage start stay storage store sw sx sy target text time timemode title to top vague vertical videoevent videosegloop visible vmax volume width withback x y
 syn match kirikiriCommandParametersEqual "=" contained nextgroup=kirikiriCommandParametersValue,kirikiriString,kirikiriBoolean
 " FIXME: won't highlight
 syn match kirikiriCommandParametersValue "=\zs\S\+" contained
