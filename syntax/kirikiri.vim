@@ -6,6 +6,12 @@ elseif exists('b:current_syntax')
 endif
 
 
+if v:version < 508
+    command -nargs=+ KirikiriHiLink hi link <args>
+else
+    command -nargs=+ KirikiriHiLink hi def link <args>
+endif
+
 
 syn case match
 
@@ -43,9 +49,6 @@ syn keyword kirikiriBoolean true false
 if v:version >= 508 || !exists("did_kirikiri_syn_inits")
     if v:version < 508
         let did_kirikiri_syn_inits = 1
-        command -nargs=+ KirikiriHiLink hi link <args>
-    else
-        command -nargs=+ KirikiriHiLink hi def link <args>
     endif
 
     KirikiriHiLink kirikiriLineComment Comment
